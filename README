@@ -1,0 +1,71 @@
+Team Members and Roles:
+
+Jackson Baur – Client Developer (Project Leader)
+Mohamed Abdelgawad – Server Developer
+Matthew Ventura – Library Developer (Shared Functions)
+
+
+Project Description:
+
+This project implements a simplified Wordle-style game using a TCP client–server architecture.
+The server loads a word bank and provides a random 5-letter word to each connected client.
+The client allows the user to guess the word and uses feedback symbols:
+
++ correct letter, correct position
+? correct letter, wrong position
+_ letter not in word
+
+Use simple ANSI color codes for nicer terminal output.
+
+Communication between client and server is done using a simple text-based protocol.
+
+
+Compile server:
+g++ server.cpp library.cpp -o server
+
+Run server:
+./server        (default port 5000)
+./server 6000   (custom port)
+
+Compile client:
+g++ client.cpp library.cpp -o client
+
+Run client:
+./client localhost
+./client localhost 5000
+
+
+Type Of Library Used:
+
+The Library we used was a simple static code library (library.cpp / library.h) that is compiled into both 
+the client and the server. It holds all the shared functionality, such as trimming input, validating guesses, 
+loading the word list, comparing guesses, and sending/receiving newline-terminated messages over the network.
+
+
+
+Protocol Description:
+
+Client -> Server:
+READY = Client ready for new word
+WORD = Client requests word again
+BYE/QUIT = Client disconnecting
+
+Server -> Client:
+HELLO = Greeting after connection
+<5-letter-word> = Random Word from the bank 
+
+The messages are terminated by a \n and the library's send_message() appends \n.
+recieve_message() reads it until it find the null terminator \n
+because of this procedure, both the client and server can detect message boundaries reliably.
+ The server is implemented using C++ threads for concurrency, meaning each client is handled in its own detached thread.
+
+
+
+Issues/Limitations:
+
+Sometimes the first random word can repeat (for example, the server might always start with “drink”).
+This happens when the server is restarted too quickly — all within the same second. 
+Since srand(time(NULL)) only updates once per second, the random number generator ends up starting in the same place. 
+After the server has been running for more than a second, the random word selection behaves normally and you’ll get different results.
+
+If words.txt is missing, empty, or doesn’t contain any valid 5-letter words, the server will not start.

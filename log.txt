@@ -1,0 +1,37 @@
+[Fri Nov 14 08:27:19 2025] Program started
+[Fri Nov 14 08:27:19 2025] Testing log_event from test_utils.cpp
+[Fri Nov 14 08:27:28 2025] Program started
+[Fri Nov 14 08:27:28 2025] Testing log_event from test_utils.cpp
+[Fri Nov 14 08:27:45 2025] Program started
+[Fri Nov 14 08:27:45 2025] Testing log_event from test_utils.cpp
+[Fri Nov 14 08:28:09 2025] Program started
+[Fri Nov 14 08:28:09 2025] Testing log_event from test_utils.cpp
+[Sun Nov 16 23:05:29 2025] Server started on port 5055
+[Sun Nov 16 23:06:26 2025] Client connected to server on port 5055
+[Sun Nov 16 23:06:26 2025] Client connected
+[Sun Nov 16 23:06:26 2025] Received from client: hello from client
+[Sun Nov 16 23:06:26 2025] Server shutting down
+[Sun Nov 16 23:06:26 2025] Server replied: hello from server
+[Sun Nov 16 23:06:26 2025] Client exiting
+[Mon Nov 24 09:58:20 2025] Client connected to server.
+[Mon Nov 24 09:58:20 2025] Client: received secret word from server.
+[Mon Nov 24 10:02:27 2025] Client disconnecting from server.
+[Mon Nov 24 10:03:01 2025] Client connected to server.
+[Mon Nov 24 10:03:01 2025] Client: received secret word from server.
+[Mon Nov 24 10:12:21 2025] Client disconnecting from server.
+[Mon Nov 24 10:13:34 2025] Client connected to server.
+[Mon Nov 24 10:13:34 2025] Client: received secret word from server.
+[Mon Nov 24 10:13:58 2025] Client: received secret word from server.
+[Mon Nov 24 10:14:07 2025] Client: received secret word from server.
+[Mon Nov 24 10:14:19 2025] Client disconnecting from server.
+[Mon Nov 24 10:14:26 2025] Client connected to server.
+[Mon Nov 24 10:14:26 2025] Client: received secret word from server.
+[Sun Nov 30 00:02:23 2025] Client connected to server.
+[Sun Nov 30 00:02:23 2025] Client: received secret word from server.
+[Sun Nov 30 00:17:50 2025] Client: received secret word from server.
+[Sun Nov 30 00:19:47 2025] Client: received secret word from server.
+[Sun Nov 30 00:23:47 2025] Client disconnecting from server.
+[Mon Dec  1 16:32:06 2025] Client connected to server.
+[Mon Dec  1 16:32:06 2025] Client: received secret word from server.
+[Mon Dec  1 16:39:12 2025] Client: received secret word from server.
+[Mon Dec  1 16:42:28 2025] Client disconnecting from server.
