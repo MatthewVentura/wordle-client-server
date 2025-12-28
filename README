@@ -1,71 +1,135 @@
-Team Members and Roles:
+Wordle Client–Server Game (C++ / TCP)
+Overview
 
-Jackson Baur – Client Developer (Project Leader)
-Mohamed Abdelgawad – Server Developer
-Matthew Ventura – Library Developer (Shared Functions)
+This project is a TCP-based Wordle-style client–server game implemented in C++.
+It demonstrates core systems programming concepts including socket programming, text-based protocols, shared libraries, and concurrent server handling.
 
+The server hosts a word bank and manages client connections, while the client provides an interactive terminal-based gameplay experience with colored feedback for guesses.
 
-Project Description:
+This project was built as a group project for CPSC 328 (Network & Secure Programming) and tested locally on Linux systems.
 
-This project implements a simplified Wordle-style game using a TCP client–server architecture.
-The server loads a word bank and provides a random 5-letter word to each connected client.
-The client allows the user to guess the word and uses feedback symbols:
+Team & Contributions
 
-+ correct letter, correct position
-? correct letter, wrong position
-_ letter not in word
+Matthew Ventura — Shared Library Developer
 
-Use simple ANSI color codes for nicer terminal output.
+Designed and implemented the reusable library used by both client and server
 
-Communication between client and server is done using a simple text-based protocol.
+Implemented input validation, word comparison logic, file loading, logging utilities, and socket helper functions
 
+Authored project documentation and integration support
 
-Compile server:
+Jackson Baur — Client Developer & Project Lead
+
+Implemented the interactive client interface
+
+Managed overall project coordination and final integration
+
+Mohamed Abdelgawad — Server Developer
+
+Implemented the multi-client TCP server
+
+Added concurrency, logging, and ANSI-colored output
+
+Features
+
+TCP client–server architecture
+
+Text-based communication protocol
+
+Concurrent server handling (multiple clients)
+
+Shared reusable C++ library
+
+Input validation and error handling
+
+ANSI-colored terminal UI for gameplay feedback
+
+File-based word bank loading
+
+Timestamped server logging
+
+Build Instructions
+Compile Server
 g++ server.cpp library.cpp -o server
 
-Run server:
-./server        (default port 5000)
-./server 6000   (custom port)
+Run Server
+./server            # Default port 5000
+./server 6000       # Custom port
 
-Compile client:
+Compile Client
 g++ client.cpp library.cpp -o client
 
-Run client:
+Run Client
 ./client localhost
 ./client localhost 5000
 
 
-Type Of Library Used:
+The server must be running before starting the client.
 
-The Library we used was a simple static code library (library.cpp / library.h) that is compiled into both 
-the client and the server. It holds all the shared functionality, such as trimming input, validating guesses, 
-loading the word list, comparing guesses, and sending/receiving newline-terminated messages over the network.
+Protocol Design
 
+Communication between client and server uses a simple text-based protocol with newline-terminated messages.
 
+Client → Server
 
-Protocol Description:
+READY — Request a new word
 
-Client -> Server:
-READY = Client ready for new word
-WORD = Client requests word again
-BYE/QUIT = Client disconnecting
+WORD — Request another word
 
-Server -> Client:
-HELLO = Greeting after connection
-<5-letter-word> = Random Word from the bank 
+BYE / QUIT — Disconnect
 
-The messages are terminated by a \n and the library's send_message() appends \n.
-recieve_message() reads it until it find the null terminator \n
-because of this procedure, both the client and server can detect message boundaries reliably.
- The server is implemented using C++ threads for concurrency, meaning each client is handled in its own detached thread.
+Server → Client
 
+HELLO — Initial greeting after connection
 
+<5-letter-word> — Random word from the word bank
 
-Issues/Limitations:
+BYE — Acknowledges client disconnect
 
-Sometimes the first random word can repeat (for example, the server might always start with “drink”).
-This happens when the server is restarted too quickly — all within the same second. 
-Since srand(time(NULL)) only updates once per second, the random number generator ends up starting in the same place. 
-After the server has been running for more than a second, the random word selection behaves normally and you’ll get different results.
+The shared library’s send_message() and receive_message() functions ensure reliable message boundaries by appending and reading until \n.
 
-If words.txt is missing, empty, or doesn’t contain any valid 5-letter words, the server will not start.
+Shared Library
+
+The project uses a static-style shared C++ library (library.cpp / library.h) compiled into both the client and server.
+
+It contains:
+
+Input trimming and validation
+
+Word comparison logic
+
+Word bank loading
+
+Random word selection
+
+Socket send/receive helpers
+
+Logging utilities
+
+Safe connection cleanup
+
+This design avoids duplicated logic and improves maintainability.
+
+Known Limitations
+
+If the server is restarted multiple times within the same second, the first randomly selected word may repeat.
+This occurs because srand(time(NULL)) seeds the random number generator with second-level precision.
+Once the server runs for more than a second, word selection behaves normally.
+
+The project is intended for local or trusted-network use and does not implement encryption or authentication.
+
+What I Learned
+
+Designing and implementing reusable shared libraries in C++
+
+Building reliable text-based network protocols
+
+Debugging real client–server synchronization issues
+
+Working with sockets, threads, and concurrency
+
+Coordinating development across a team-based codebase
+
+Why This Project Matters
+
+This project reflects real-world systems programming skills commonly used in backend development, networking, and infrastructure roles. It goes beyond toy programs by combining networking, concurrency, modular design, and documentation into a working system.
